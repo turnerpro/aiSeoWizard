@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html class="h-full">
+
+<head>
+    <title>SEO Wizard</title>
+    <img src="../images/" alt="">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="flex flex-col h-full bg-white text-black">
+    <header class="bg-black p-4 text-white text-center">
+        <h1><strong>SEO Wizard</strong></h1>
+    </header>
+
+    <div class="flex-grow container mx-auto p-4">
+        <form method="post" class="mb-4">
+            <label for="url" class="block mb-2">Enter URL:</label>
+            <input type="text" id="url" name="url" class="border p-2 w-full mb-4">
+            <input type="submit" value="Get Meta Tags"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        </form>
+
+        {% if meta_tags %}
+        <div class="flex">
+            <div class="w-1/2 pr-5">
+                <h2 class="text-lg mb-2">Meta Tags:</h2>
+                <ul>
+                    {% for tag in meta_tags %}
+                    {% if tag.get('name') and tag.get('content') %}
+                    <li><strong>{{ tag['name'].capitalize()}}:</strong> {{ tag['content'] }}</li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if body_text %}
+                    <li><strong>{{body_text}}:</strong></li>
+                    {% endif %}
+                    {% if ga_script_found is not none %}
+                    <li><strong>Google Analytics Script Found:</strong> {{ 'Yes' if ga_script_found else 'No' }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="w-1/2 pl-5">
+                <h2 class=" text-lg mb-2">Suggested Meta Tags:</h2>
+                <ul>
+                </ul>
+                <input type="submit" value="Suggest New Meta Tags"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            </div>
+        </div>
+        {% endif %}
+
+
+    </div>
+
+    <footer class="bg-red-600 p-4 text-white text-center">
+        <p>©2024 SEO Wizard</p>
+    </footer>
+</body>
+
+</html>
