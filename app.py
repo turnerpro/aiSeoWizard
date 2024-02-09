@@ -2,11 +2,12 @@ from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup
 import openai
+import constants
 
 app = Flask(__name__)
 
 #ToDo move this to build step
-openai_api_key = "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"
+openai_api_key = constants.openai_api_key
 
 def get_meta_tags_and_ga(url):
     try:
